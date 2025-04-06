@@ -1,6 +1,0 @@
-﻿  Kernl.c
-C:\Users\vicen\source\repos\Arekia\Arekia\MSR.h(4,13): error C2129: static function 'void WriteMSR(uint32_t,uint64_t)' declared but not defined
-  (compiling source file 'Kernl.c')
-      C:\Users\vicen\source\repos\Arekia\Arekia\MSR.h(4,13):
-      see declaration of 'WriteMSR'
-  
