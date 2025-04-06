@@ -386,10 +386,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\main.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="Kernl.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\debug.vbs" />
+    <None Include="MSR.asm">
+      <DeploymentContent>false</DeploymentContent>
+      <FileType>Script</FileType>
+    </None>
+    <None Include="MSR.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Kernl.h" />
+    <ClInclude Include="MSR.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

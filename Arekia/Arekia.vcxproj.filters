@@ -17,10 +17,27 @@
     <None Include="..\..\debug.vbs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="MSR.asm">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="MSR.c">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\main.c">
+    <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Kernl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Kernl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MSR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

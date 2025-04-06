@@ -6,20 +6,11 @@
 #include <efi.h>
 #include <efilib.h>
 #include <libsmbios.h>
+#include "Kernl.h"
 
-#if defined(_M_X64) || defined(__x86_64__)
+#pragma message disable VCR003
+
 static CHAR16* ArchName = L"x86 64-bit";
-#elif defined(_M_IX86) || defined(__i386__)
-static CHAR16* ArchName = L"x86 32-bit";
-#elif defined (_M_ARM64) || defined(__aarch64__)
-static CHAR16* ArchName = L"ARM 64-bit";
-#elif defined (_M_ARM) || defined(__arm__)
-static CHAR16* ArchName = L"ARM 32-bit";
-#elif defined (_M_RISCV64) || (defined(__riscv) && (__riscv_xlen == 64))
-static CHAR16* ArchName = L"RISC-V 64-bit";
-#else
-#  error Unsupported architecture
-#endif
 
 // Tri-state status for Secure Boot: -1 = Setup, 0 = Disabled, 1 = Enabled
 INTN SecureBootStatus = 0;
@@ -31,9 +22,9 @@ INTN SecureBootStatus = 0;
 static EFI_STATUS PrintSystemInfo(VOID)
 {
 	EFI_STATUS Status;
-	SMBIOS_STRUCTURE_POINTER Smbios;
-	SMBIOS_STRUCTURE_TABLE* SmbiosTable;
-	SMBIOS3_STRUCTURE_TABLE* Smbios3Table;
+	SMBIOS_STRUCTURE_POINTER Smbios = {0};
+	SMBIOS_STRUCTURE_TABLE* SmbiosTable = NULL;
+	SMBIOS3_STRUCTURE_TABLE* Smbios3Table = NULL;
 	UINT8 Found = 0, * Raw, * SecureBoot, * SetupMode;
 	UINTN MaximumSize, ProcessedSize = 0;
 
@@ -114,9 +105,14 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 
 	PrintSystemInfo();
 
-	Print(L"\n%EPress any key to exit.%N\n");
+	Print(L"\n%EPress any key to continue.%N\n");
 	SystemTable->ConIn->Reset(SystemTable->ConIn, FALSE);
 	SystemTable->BootServices->WaitForEvent(1, &SystemTable->ConIn->WaitForKey, &Event);
+
+	SystemTable->ConOut->ClearScreen(SystemTable->ConOut);
+
+	KernelMain();
+
 #if defined(_DEBUG)
 	// If running in debug mode, use the EFI shut down call to close QEMU
 	SystemTable->RuntimeServices->ResetSystem(EfiResetShutdown, EFI_SUCCESS, 0, NULL);

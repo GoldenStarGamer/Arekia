@@ -1,0 +1,3 @@
+﻿  main.c
+C:\Users\vicen\source\repos\Arekia\main.c(10,17): warning C4083: expected '('; found identifier 'disable'
+  uefi-simple.vcxproj -> C:\Users\vicen\Source\Repos\Arekia\x64\Debug\uefi-simple.efi
